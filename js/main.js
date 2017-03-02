@@ -136,7 +136,8 @@ $(function () {
         });
         $.ajax({
             type: 'POST',
-            url: 'http://www.recachina.com/tv_test/anniversary',
+            //上传到服务器，服务器的地址：
+            url: '',
             // post payload:
             data: {image:_image},
             success: function(data){
