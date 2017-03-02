@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>另一面的我</title>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+
+    <link rel="stylesheet" type="text/css" href="css/cropper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+    <script type="text/javascript">
+        /*if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+         var version = parseFloat(RegExp.$1);
+         if(version>2.3){
+         var phoneScale = parseInt(window.screen.width)/375;
+         document.write('<meta name="viewport" content="width=375, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+         }else{
+         document.write('<meta name="viewport" content="width=375, target-densitydpi=device-dpi">');
+         }
+         }else{
+         document.write('<meta name="viewport" content="width=375, user-scalable=no, target-densitydpi=device-dpi">');
+         }*/
+
+        var phoneScale = parseInt(window.screen.width)/375;
+        document.write('<meta name="viewport" content="width='+phoneScale*375+', user-scalable=no, target-densitydpi=device-dpi">');
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="imgInfo js-photo">
+            <img src="image/8.png" alt=""/>
+            <div class="js-text txt">点击选择照片</div>
+        </div>
+        <div class="showarea hide js-showarea">
+            <img id="image" src="" class="js-showimg" alt="Picture">
+        </div>
+        <div class="save js-save hide">保存</div>
+        <input type="file" class="hide js-upload" name="upfile" id="upfile"  accept="image/*" capture="camera" />
+    </div>
+
+    <script src="js/load-image.all.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+
+    <script src="js/cropper.min.js"></script>
+
+    <script>
+
+        $(function(){
+            var cropper = null, interval = -1;;
+
+
+            $(".js-photo").off("click").on("click",function(){
+                showTip();
+                $(".js-upload")[0].click();
+                loadImage.upload({
+                    domid: "upfile",
+                    multiple: false,
+                    before: function(){console.log("before");},
+                    fail: function(failMsg,file){console.log("fail",failMsg,file);},
+                    success: function(dataURL,file){
+                        clearInterval(interval);
+                        //console.log(dataURL);
+                        $(".js-showarea").removeClass("hide");
+                        $(".js-showimg").attr("src", dataURL);
+                        $(".js-photo").addClass("hide");
+                        $(".js-save").removeClass("hide");
+                        var image = document.querySelector('#image');
+                        cropper = new Cropper(image, {
+                            viewMode:0,
+                            dragMode: 'move',
+                            aspectRatio: 2 / 5,
+                            restore: false,
+                            guides: false,
+                            center: false,
+                            highlight: false,
+                            cropBoxMovable: false,
+                            cropBoxResizable: false,
+                            toggleDragModeOnDblclick: false,
+
+                            crop: function(e) {
+                                console.log(e.detail.x);
+                                console.log(e.detail.y);
+                                console.log(e.detail.width);
+                                console.log(e.detail.height);
+                                console.log(e.detail.rotate);
+                                console.log(e.detail.scaleX);
+                                console.log(e.detail.scaleY);
+                            }
+
+                        });
+
+                    },
+                    complete: function(){console.log("complete");},
+                    progress: function(total,remainder){console.log("progress",total,remainder);},
+                    uploadAction: function(fileData){
+                        //console.log(fileData);
+                        var defer = $.Deferred();
+                        defer.resolve(fileData);
+                        return defer.promise();
+                    },
+                    type: 'image/png',
+                    quality: 1,
+                    dataType: 'base64',
+                });
+            });
+
+            $(".js-save").off("click").on("click", function(){
+                var data = cropper.getCroppedCanvas().toDataURL({width:750, height:940});
+                var key = getParams("key", window.location.href);
+                if(key == 1){
+                    sessionStorage.setItem('base64_1', data);
+                }else{
+                    sessionStorage.setItem('base64_2', data);
+                }
+                //window.open(location.href=data);
+                setTimeout(function () {
+                    $(".js-text").html("准备跳转");
+                    window.location.href = "index.htm";
+                },1500);
+            });
+
+            function showTip(){
+                var txtArr = ["正在生成中.","正在生成中..","正在生成中..."];
+                var count = 0;
+                interval = setInterval(function () {
+                    count = (count+3)%3;
+                    $(".js-text").html(txtArr[count]);
+                    count ++;
+                },500);
+            }
+
+            function getParams(_name, str){
+                var flag = new RegExp(".*\\b"+_name+"\\b(\\s*=([^&]+)).*", "gi").test(str);
+                if(flag){
+                    return RegExp.$2;
+                }else{
+                    return "";
+                }
+            }
+        });
+        /*window.addEventListener('DOMContentLoaded', function () {
+            var image = document.querySelector('#image');
+            var cropper = new Cropper(image, {
+                dragMode: 'move',
+                aspectRatio: 9 / 16,
+                autoCropArea: 0.65,
+                restore: false,
+                guides: false,
+                center: false,
+                highlight: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
+
+                crop: function(e) {
+                    console.log(e.detail.x);
+                    console.log(e.detail.y);
+                    console.log(e.detail.width);
+                    console.log(e.detail.height);
+                    console.log(e.detail.rotate);
+                    console.log(e.detail.scaleX);
+                    console.log(e.detail.scaleY);
+                }
+
+            });
+        });*/
+
+//        setTimeout(function(){
+//            console.log("timeout");
+//            var tmp =cropper.getCroppedCanvas();
+//            console.log("tmp =", tmp);
+//            var data = tmp.toDataURL();
+//            console.log("data=", data);
+//        },2000);
+    </script>
+</body>
+</html>

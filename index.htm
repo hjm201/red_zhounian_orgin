@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>另一面的我</title>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <link rel="stylesheet" type="text/css" href="css/cropper.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css"> 
+    
+    <script type="text/javascript">
+        var phoneScale = parseInt(window.screen.width)/375;
+        document.write('<meta name="viewport" content="width='+phoneScale*375+', user-scalable=no, target-densitydpi=device-dpi">');
+    </script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?2370dd85a0b7fbaa62dbd49c9a63dcef";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</head>
+<body>
+
+    <!--canvas里面画的-->
+    <canvas id="c"></canvas>
+
+
+    <!--覆盖的编辑层-->
+    <div class="mainPage js-mainPage ">
+        <div class="topArea js-topArea">
+            <div class="topArea-con js-topArea-con fl">
+                <div class="leftPhoto js-gotocrop" data-key="1">
+                    <img src="image/6.png" alt=""/>
+                    <div class="desc">上传你的日常照片</div>
+                </div>
+            </div>
+            <div class="topArea-con js-topArea-con fl">
+                <div class="rightPhoto js-gotocrop js-right-carema"  data-key="2">
+                    <img src="image/6.png" alt=""/>
+                    <div class="desc">上传能够展现你另一面的照片</div>
+                </div>
+            </div>
+            <div class="cb"></div>
+        </div>
+        <div class="delArea  js-delArea">
+            <div class="delArea-con fl js-delArea-con v_hide">
+                <div class="left_del js-del" data-key="1">
+                    <img src="image/del.png" alt=""/>
+                </div>
+            </div>
+            <div class="delArea-con fl js-delArea-con v_hide">
+                <div class="right_del js-del" data-key="2">
+                    <img src="image/del.png" alt=""/>
+                </div>
+            </div>
+            <div class="cb"></div>
+        </div>
+        <div class="inputContent">
+            <div class="content">
+                <label class="tip">平时的你是怎样的</label>
+                <div class="inputArea">
+                    <input type="text" class="js-input" data-key="1" maxlength="14" placeholder="3-14字,如：我是红毯创始人"/>
+                </div>
+                <label class="tip">说说你的另一面</label>
+                <div class="inputArea">
+                    <input type="text" class="js-input" data-key="2" maxlength="14" placeholder="3-14字,如：我也是机车疯狂爱好者"/>
+                </div>
+                <div class="btn js-generater">
+                    <img src="image/btn.png" alt=""/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--显示结果的图层-->
+ <!--   <div class="showPage js-showPage hide">
+        <div class="mask"></div>
+        <div class="preview animated">
+            <img src="" alt=""/>
+        </div>
+    </div>-->
+
+    <!--crop-->
+    <div class="container hide js-container">
+        <div class="showarea js-showarea">
+            <img id="image" src="" class="js-showimg" alt="Picture">
+        </div>
+        <div class="save js-save">保存</div>
+        <div class="save-txt">请调整图片，将合适的内容移至蓝框内</div>
+
+    </div>
+    
+    <div class="loading js-loading hide">
+        <img src="image/loader.gif" alt=""/>
+    </div>
+
+    <input type="file" class="hide js-upload" name="upfile" id="upfile"  accept="image/*" capture="camera" />
+
+    <script type="text/javascript" src="js/fabric.min.js"></script>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script src="js/load-image.all.min.js"></script>
+    <script src="js/cropper.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>

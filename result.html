@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>另一面的我</title>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+    <script type="text/javascript">
+        /*if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+         var version = parseFloat(RegExp.$1);
+         if(version>2.3){
+         var phoneScale = parseInt(window.screen.width)/375;
+         document.write('<meta name="viewport" content="width=375, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+         }else{
+         document.write('<meta name="viewport" content="width=375, target-densitydpi=device-dpi">');
+         }
+         }else{
+         document.write('<meta name="viewport" content="width=375, user-scalable=no, target-densitydpi=device-dpi">');
+         }*/
+
+        var phoneScale = parseInt(window.screen.width)/375;
+        document.write('<meta name="viewport" content="width='+phoneScale*375+', user-scalable=no, target-densitydpi=device-dpi">');
+    </script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?2370dd85a0b7fbaa62dbd49c9a63dcef";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+    <section class="resultPage">
+        <div class="resultImg">
+            <img class="js-result" width="237" height="422" src="" alt="另一面的我"/>
+        </div>
+        <div class="resultInfo-con">
+            <div class="resultInfo">
+                <div class="title">向更多人展现不一样的你</div>
+                <div class="desc">* 长按保存以上生成的照片，分享至朋友圈，获得规定的点赞数，即可截图发至【红毯】公众号后台，赢取奖品。</div>
+                <div class="subtitle">
+                    <span class="text">规则如下</span>
+                    <div class="line"></div>
+                </div>
+                <div class="tip">
+                    <ol>
+                        <li>1、活动截止日期：2017年3月3日</li>
+                        <li>2、我们将在最新一期推文中公布获奖用户，敬请期待！</li>
+                        <li>3、同一ID不可重复获奖</li>
+                        <li>4、只要集满相应点赞数，即可获得奖品，奖品有限，先到先得喔~~</li>
+                    </ol>
+                </div>
+
+
+                <div class="groups">
+                    <div class="panel">
+                        <div class="mainInfo">一、 集满 300 赞</div>
+                        <div class="subInfo">可获一等奖：Domingo音箱&nbsp;&nbsp;&nbsp;&nbsp;价值 7000 元 （1名）</div>
+                    </div>
+                    <div class="panel">
+                        <div class="mainInfo">二、 集满 60 赞</div>
+                        <div class="subInfo">可获二等奖：西藏千金方礼盒&nbsp;&nbsp;&nbsp;&nbsp;价值 600 元 （20名）</div>
+                    </div>
+                    <div class="panel">
+                        <div class="mainInfo">三、 集满 30 赞</div>
+                            <div class="subInfo">可获三等奖：周杰伦同款1MORE耳机&nbsp;&nbsp;&nbsp;&nbsp;价值 200 元 （30名）</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="resultInfo">
+                <div class="version">活动最终解释权归红毯所有</div>
+            </div>
+        </div>
+    </section>
+
+
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            function init(){
+                var str = getParams('url', window.location.href);
+                console.log(str);
+                if(str){
+                    $(".js-result").attr("src", str);
+                }
+            }
+
+            function getParams(_name, str){
+                var flag = new RegExp(".*\\b"+_name+"\\b(\\s*=([^&]+)).*", "gi").test(str);
+                if(flag){
+                    return RegExp.$2;
+                }else{
+                    return "";
+                }
+            }
+
+            init();
+        })
+    </script>
+</body>
+</html>
